@@ -111,88 +111,41 @@ p.grabDate = function(dueDate){
 
 // =========================== START OF EXERCISES ===========================================
 
-// checkListForDuplicateTasks returns a boolean as to whether any of the toDo's we've already created match the one we input into the function.
-p.checkListForDuplicateTasks = function(toDoList, taskTitle){
-	// use _.every to loop through the toDoList.
-	return _.every(toDoList, function(listItem){
-		// user a helper function to get the text from each item from each list item.
-		var listItemText = p.getTextFromListItem(listItem);
-		// check to see whether the text matches.
-		if (listItemText !== taskTitle) {
-		// if it does, return true.
-			return true;
-		} else {
-		// if it doesn't, return false.
-			return false;
-		}
-	});
-};
-
-// takes in a string value representing the date and formats it to mm/dd/yyyy
+// 2. takes in a string value representing the date and formats it to mm/dd/yyyy
 p.formatDate = function(date){
-	var newDate = date.split('-');
-	var month = newDate[0]
-	var date = newDate[1];
-	newDate[0] = date;
-	newDate[1] = month;
-	newDate = newDate.join('-');
-	return newDate;
+
 };
 
-// use the Date object to return todays month and date. Use the p.formatDate helper function to return the currentDate formatted in mm/dd/yyyy
 
-// look up how to use the Date object here: http://mzl.la/1fvwX1i
+// 17. checkListForDuplicateTasks returns a boolean as to whether any of the toDo's we've already created match the one we input into the function.
+p.checkListForDuplicateTasks = function(toDoList, taskTitle){
+	// use _.every to loop through the toDoList
+};
+
+
+// use the Date object to return todays month and date. Use the p.formatDate helper function to return the currentDate formatted in mm/dd/yyyy. Look up how to use the Date object here: http://mzl.la/1fvwX1i
 p.getCurrentDate = function(){
-	return ('0' + (new Date().getMonth() + 1) + '-' + (new Date().getDate()));
-};
 
-
-p.reverseDate = function(dateInput){
-	var result = [];
-	_.each(dateInput.split('-'), function(digit){
-		result.unshift(digit);
-	});
-
-	return result.join('-');
 };
 
 // takes in the listItem and a string value that represents the inputClass and returns true or false as to whether an html element has a class.
 p.hasClass = function(listItem, inputClass){
-	// grab the classlist array from our listItem;
-	var classList = p.grabClassList(listItem);
-	// return true or false if the classList _.contains the inputClass
-	return _.contains(classList, inputClass);
+
 };
 
 // returns an array containing only the completed tasks.
 p.getAllCompleteTasks = function(list){
-// _.filter out the toDo's in the list that don't have the class 'disabled'.
-	return _.filter(list, function(toDo){
-		// return whether or not the element has the class 'disabled.'
-		return !p.hasClass(toDo, 'disabled');
-	});
+	// TIP:  complete p.hasClass before solving this function.
+
 };
 
 // emptys all list elements from our toDoList html element.
 p.emptyList = function(toDolist){
-	// use a helper function to grab the array of children from the toDoList
-	var arrOfChildren = p.grabChildren(toDolist);
-	// loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist.
-	_.each(arrOfChildren, function(listItem){
-		// use our helper function, p.removeLastToDoListItem, to remove each item from the toDoList.
-		p.removeLastToDoListItem(toDolist);
-	});
-	// return the list to the user
-	return list;
+
 };
 
 // updates the toDoList element with a new list of li
 p.updateToDoList = function(toDoList, newList){
-	// use _.each to loop through the newList, adding each list item to the toDoList 
-	_.each(newList, function(newListItem){
-		// use our p.addItem helper function to add each new item to the list.
-		p.addItem(toDoList, newListItem);
-	});
 
 };
 
@@ -201,49 +154,11 @@ p.updateToDoList = function(toDoList, newList){
 // takes the currentToDoList and the current date, and returns an array containing all of the elements that are dated before the current due date.
 p.getPastDueItems = function(currentToDoList, currentDate){
 	// use _.filter to return only the elements in the currentToDoList that are dated before the currentDate.
-	return _.filter(currentToDoList, function(listItem){
-		// create an isLate flag, that we're going to set to false.
-		var isLate = false;
-		// grab the array of children out of the listItem
-		var children = p.grabChildren(listItem);
-		// use _.each to loop through each child element
-	    _.each(children, function(listSection){
-	    	// check to see whether the element has the class 'dueDate'
-			if (p.hasClass(listSection, 'dueDate')){
-			 // if the it does, check whether the elements date lands before the current date
-		     var itemDueDate = p.formatDate(p.getTextFromElement(listSection)).split('-');
-	          if (itemDueDate[0] <= currentDate[0] && itemDueDate[1] < currentDate[1]) {
-	          	// if it does, set isLate to true.
-			    isLate = true;
-			  }
-			}
-		});
-		// outside of your _.each return isLate; 
-			return isLate
-	});
 };
 
 // takes the toDoList html element and returns a new list where the list items are sorted.
 p.sortByDate = function(toDoList){
-	// _.map the items toDoList HTML object to a new array
-	var newList = _.map(toDoList, function(item){
-		return item;
-	});
-	// newList now has access to the .sort() function. Use it to create a new array with all of the list items sorted.
-	// you can figure out how to use the sort function here: http://www.sitepoint.com/sophisticated-sorting-in-javascript/
-	var sortedList = newList.sort(function(a, b){
-		// get the string value of the dueDates from each item and save them into variables.
-		var aDueDate = p.formatDate(p.getTextFromListItem(a)).split('-');
-		var bDueDate = p.formatDate(p.getTextFromListItem(b)).split('-');
-		// convert the dates into Numbers (*hint hint*) and compare them.
-		var testADate = Number(aDueDate[0].toString() + aDueDate[1].toString());
-		var testBDate = Number(bDueDate[0].toString() + bDueDate[1].toString());
 
-		return testADate >= testBDate;
-
-	});
-	// return the sorted list to the user.
-	return sortedList
 };
 
 

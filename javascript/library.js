@@ -1,14 +1,9 @@
 window.p = {};
 
 /*
-
 We built a library that's similar to jQuery, that abstracts away having to learn how to work with the DOM. The functions are named appropriately, and there are descriptions and examples of how each works in the documentation (aka the READ.me)
-
 If you're unsure what a helper function takes as a parameter? Read the documentation. Not sure what it returns? Read the documentation and/or console.log the value.
-
 This week is not just about building up your JavaScript/HTML/CSS skills, it's also about learning how to think and work like a developer - and a lot of that is about learning to parse through documentation to get what you're looking for.
-
-
 */
 
 // returns an array containing all of the elements with the corresponding class.
@@ -160,8 +155,3 @@ p.getPastDueItems = function(currentToDoList, currentDate){
 p.sortByDate = function(toDoList){
 
 };
-
-
-
-
-

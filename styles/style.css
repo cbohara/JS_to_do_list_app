@@ -1,0 +1,16 @@
+.item-attribute {
+	display: inline;
+	margin-right: 50px;
+}
+
+.late {
+	font-color: red;
+}
+
+.specialFunctionality {
+	display: inline;
+}
+
+.specContainer {
+	margin-bottom: 50px;
+}

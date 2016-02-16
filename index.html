@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title>Telegraph Prep+ To Do List</title>
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="javascript/listLogic.js"></script>
+	<script type="text/javascript" src="javascript/library.js"></script>
+</head>
+<body>
+	<form class="form-inline" id="taskForm">
+	  <div class="form-group">
+	    <label for="exampleInputName2">Task</label>
+	    <input type="text" class="form-control" id="taskInput" placeholder="...">
+	  </div>
+	   <div class='input-group date'>
+         <input type='date' class="form-control" id='datePicker'/>
+       </div>
+	  <button type="submit" class="btn btn-default">Create Task</button>
+	</form>
+	<!-- http://www.w3schools.com/bootstrap/bootstrap_ref_css_buttons.asp -->
+	<div id="specContainer">
+		<form id="pastDue" class='specialFunctionality'>
+			<button type="submit" class="btn btn-danger">Show Past Due</button>
+		</form>
+		<form id="restoreTasks" class='specialFunctionality'>
+			<button type="submit" class="btn btn-success">Restore All Tasks</button>
+		</form>
+		<form id="clearCompleted" class='specialFunctionality'>
+			<button type="submit" class="btn btn-primary">Clear Finished Tasks</button>
+		</form>
+		<form id="sortByDate" class='specialFunctionality'>
+			<button type="submit" class="btn btn-info">Sort By Date</button>
+		</form>
+	</div>
+	<!--  Below is the html representation of our list, we will be adding toDo items to this list dynamically (on the fly) using the data the user inputs above.
+	
+	Our 'ul' has some interesting things we can investigate to learn more about HTML & CSS.
+	
+	1. The 'ul' is the PARENT ELEMENT, and everything inside of it is a CHILD OF THAT ELEMENT. I wouldn't recommend looking into how all of that works now..but if you're interested: https://www.youtube.com/watch?v=aPW_wQEFvek
+	
+	2. The 'ul' has both a class, and an id assigned to it. These make it easier to classify our element for styling (css), and accessing (javascript) purposes. Learn more about the difference here - https://www.youtube.com/watch?v=m-cRRCvW9U4
+
+	 -->
+	<ul class="list-group" id="list">
+		<!-- this is our sample list item for your reference. Delete this item once you get the listLogic functionality working. -->
+		<li class="list-group-item">
+			<span class="item-attribute">
+				<input type="checkBox" onclick="">
+			</span>
+			<p class="item-attribute">Sample Item</p>
+			<span class="dueDate item-attribute">02-16-2016</span>
+		</li>
+	</ul>
+</body>
+</html>

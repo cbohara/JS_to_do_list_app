@@ -37,8 +37,8 @@ p.updateIdValue = function(id, inputText){
 	return p.grabElementById.value;
 };
 
+// returns an array containing the child of the associated element.
 p.grabChildren = function(element){
-	// returns an array containing the child of the associated element.
 	return element.children;
 };
 
@@ -113,43 +113,76 @@ p.grabDate = function(dueDate){
 
 // 2. takes in a string value representing the date and formats it to mm/dd/yyyy
 p.formatDate = function(date){
+	// transform string value into an array to seperate the month, date, and year into seperate elements
 	var arrayDate = date.split('-');
+	// remove the year from the beginning of the array
 	var year = arrayDate.shift();
+	// push the year to the end of the array
 	arrayDate.push(year);
+	// transform the array back into a string
 	var formattedDate = arrayDate.join('-');
+	// return the date formatted as mm/dd/yyyy
 	return formattedDate;
 };
 
 // 17. checkListForDuplicateTasks returns a boolean as to whether any of the toDo's we've already created match the one we input into the function.
 p.checkListForDuplicateTasks = function(toDoList, taskTitle){
 	// use _.every to loop through the toDoList
+	_.every(toDoList, function(listItem){
+		// use a helper function to get the text from each item from each list item
+		var listItemText = getTextFromListItem(listItem);
+		// check to see whether the text matches. if the text matches, the function will return true.  if the text does not match, return false.
+		return listItemText === taskTitle;
+	});
 };
-
 
 // use the Date object to return todays month and date. Use the p.formatDate helper function to return the currentDate formatted in mm/dd/yyyy. Look up how to use the Date object here: http://mzl.la/1fvwX1i
 p.getCurrentDate = function(){
-
+	// create a variable to hold the current date
+	var currentDate = new Date();
+	// use the helper function to return the currentDate formatted in mm/dd/yyyy
+	return formatDate(currentDate);
 };
 
 // takes in the listItem and a string value that represents the inputClass and returns true or false as to whether an html element has a class.
 p.hasClass = function(listItem, inputClass){
-
+	// returns an array filled with all of the classes placed on the listItem element
+	var classArray = grabClassList(listItem);
+	// loop through the classArray to determine if an element matches the inputClass. if there is a match, the function will return true. else it will return false.
+	_.every(classArray, function(index){
+		return index === inputClass;
+	}); 
 };
 
-// returns an array containing only the completed tasks.
+// returns an array containing only the completed tasks 
+// TIP: complete p.hasClass before solving this function
 p.getAllCompleteTasks = function(list){
-	// TIP:  complete p.hasClass before solving this function.
-
+	// use helper function return whether or not the element has the class 'disabled.'
+	_.every(list, function(item){
+		// returns an array filled with all of the classes placed on the corresponding element
+		var classArray = p.grabClassList(item);
+		// filter out the items in the classArray that don't have the class 'disabled'
+		_.filter(classArray, function(index){
+			return index != 'disabled';
+		});
+	});
 };
 
 // emptys all list elements from our toDoList html element.
 p.emptyList = function(toDolist){
+	// use a helper function to grab the array of children from the toDoList
+	// returns an array containing the child of the associated element
+	var childArray = grabChildren(toDoList);
+	console.log(childArray);
+	// loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist. return the empty list to the user.
+	return _.each(childArray,p.removeLastToDoListItem(index));
 
 };
 
 // updates the toDoList element with a new list of li
 p.updateToDoList = function(toDoList, newList){
-
+	// use _.each to loop through the newList. use our p.addItem helper function to add each new item to the list
+	return _.each(newList, addItem(itemToAddTo, newListItemToAdd));
 };
 
 // NIGHTMARE MODE: These last two pieces of functionality take quite a bit of JavaScript prowess. Please proceed with caution...

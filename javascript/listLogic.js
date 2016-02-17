@@ -20,6 +20,7 @@ $(document).ready(function(){
 			// which helper function would make sense here?
 		var userInput = p.grabInputValueById('taskInput');
 		var userDate = p.grabInputValueById('datePicker');
+
 		// 2. in your library.js, create your p.formatDate helper function 
 			// 2a. create a chosenDueDate variable, and use your p.formatDate helper function to the proper date.
 		var chosenDueDate = p.formatDate(userDate);
@@ -31,6 +32,7 @@ $(document).ready(function(){
 
 			// 4. use one of our helper functions to create  HTML input element and save it to the variable checkBox;
 			var checkBox =  p.createItem('input');
+
 				// use one of our helper functions to change the type of the input to 'checkBox' so that it'll show up 
 			p.changeType(checkBox, 'checkBox');
 
@@ -94,16 +96,22 @@ $(document).ready(function(){
 	};
 
 // ======SECTION 2 FILTER FUNCTIONALITY =======================
+	//in your index.html, uncomment lines 31 through 33
 
 	// 1. create a 'clearCompletedTasksButton' variable that holds the element of the completedTask button
 	var clearCompletedTasksButton = p.grabElementById('clearCompleted');
+
 	// 2. create an onsubmit event on the clearCompletedTasksButton
+	clearCompletedTasksButton.onsubmit = function(e){
+		// preventDefault stops the page from reloading when an event happens.
+		e.preventDefault();
+		// use our helper, p.getAllCompleteTasks, function to get a collection of all of the completed tasks, and save it into a variable, completedToDos
+		var completedToDos = p.getAllCompleteTasks(toDoList);
 
-		// 3. instantiate your preventDefault()
-		// 4. use our helper, p.getAllCompleteTasks, function to get a collection of all of the completed tasks, and save it into a variable, completedToDos
-	
-		// 5. use our helper, p.emptyList empty the current list of items in our toDoList
+		// use our helper, p.emptyList empty the current list of items in our toDoList
+		p.emptyList(toDoList);
 
-		// 6. use our helper, p.updateToDoList toDo list with  only the completedToDos 	
-
+		// use our helper, p.updateToDoList toDo list with  only the completedToDos 
+		p.updateToDoList(toDoList, completedToDos);
+	};	
 });

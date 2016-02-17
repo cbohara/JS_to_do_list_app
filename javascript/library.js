@@ -82,7 +82,7 @@ p.addClass = function(element, inputClass){
 // gets text specifically from list items
 p.getTextFromListItem = function(listItem){
 	var listItemTitle = listItem.children[1].innerText;
-	return listItemTitle
+	return listItemTitle;
 };
 
 // gets text specifically from other elements that aren't list items
@@ -97,7 +97,7 @@ p.grabClassList = function(element){
 // adds text to the inner text of an element
 p.addTextToElement = function(element, inputText){
 	element.innerHTML = inputText;
-	return "text has been added to your chosen element";
+	return element.innerHTML;
 };
 
 // takes a dueDate input and returns the value;

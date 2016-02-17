@@ -18,9 +18,8 @@ $(document).ready(function(){
 
 		// 1. use one of our helper functions grab the users input and chosen due date when the user submits their task and save them to variables.
 			// which helper function would make sense here?
-		var userInput = p.grabElementById('taskInput');
+		var userInput = p.grabInputValueById('taskInput');
 		var userDate = p.grabInputValueById('datePicker');
-		// console.dir(userDate);
 		// 2. in your library.js, create your p.formatDate helper function 
 			// 2a. create a chosenDueDate variable, and use your p.formatDate helper function to the proper date.
 		var chosenDueDate = p.formatDate(userDate);
@@ -87,7 +86,7 @@ $(document).ready(function(){
 			p.addItem(toDoList, newListItem);
 
 			// 15. push our new list item in a master list.
-			masterList.push(newListItem);
+			masterList.push(toDoList);
 
 			// 16. use the p.updateIdValue helper function to update the task input box, and date picker to be empty.
 			p.updateIdValue('taskInput', '');
@@ -98,11 +97,9 @@ $(document).ready(function(){
 
 	// 1. create a 'clearCompletedTasksButton' variable that holds the element of the completedTask button
 	var clearCompletedTasksButton = p.grabElementById('clearCompleted');
-
 	// 2. create an onsubmit event on the clearCompletedTasksButton
 
 		// 3. instantiate your preventDefault()
-
 		// 4. use our helper, p.getAllCompleteTasks, function to get a collection of all of the completed tasks, and save it into a variable, completedToDos
 	
 		// 5. use our helper, p.emptyList empty the current list of items in our toDoList

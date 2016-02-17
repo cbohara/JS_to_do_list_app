@@ -31,7 +31,7 @@ p.grabInputValueById = function(id){
 	return p.grabElementById(id).value;
 };
 
-// updates the input value to the 
+// updates the input value to the corresponding id element
 p.updateIdValue = function(id, inputText){
 	p.grabElementById(id).value = inputText;
 	return p.grabElementById.value;
@@ -117,9 +117,8 @@ p.formatDate = function(date){
 	  var year = arrayDate.shift();
 	  arrayDate.push(year);
 	  var formattedDate = arrayDate.join('-');
-	  console.log(formattedDate);
+	  // console.log(formattedDate);
 };
-
 
 // 17. checkListForDuplicateTasks returns a boolean as to whether any of the toDo's we've already created match the one we input into the function.
 p.checkListForDuplicateTasks = function(toDoList, taskTitle){

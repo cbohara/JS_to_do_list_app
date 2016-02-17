@@ -10,14 +10,11 @@ $(document).ready(function(){
 
 	// we're going to be sorting/changing our original list, so our masterlist is going to cache every single item we create so that we can always reference them.
 	var masterList = [];
-	
 
 	// adding an event called 'onsubmit' to the createTaskForm. When you press the 'createTask' button, it will run the code below. You'll be using this syntax later down the line to create other event handlers and buttons.
 	createTaskForm.onsubmit = function(e){
 		// whenever you use a an event hanlder and you DON'T want the page to refresh, you must use an e.preventDefault()
 		e.preventDefault();
-		//console.log('log hey', true);  // Test works -js
-
 
 		// 1. use one of our helper functions grab the users input and chosen due date when the user submits their task and save them to variables.
 			// which helper function would make sense here?
@@ -33,14 +30,10 @@ $(document).ready(function(){
 			// 3. use one of our helper functions to create a new list, 'li' element, saved to the variable "newListItem".
 			var newListItem = p.createItem('li');
 
-
 			// 4. use one of our helper functions to create  HTML input element and save it to the variable checkBox;
 			var checkBox =  p.createItem('input');
 				// use one of our helper functions to change the type of the input to 'checkBox' so that it'll show up 
-			p.changeType('input', checkBox);
-			
-			
-
+			p.changeType(checkBox, 'checkBox');
 
 			// IGNORE THIS: add an onclick handler to the checkbox's so that when we finish a task it goes grey. Ignore this for now.
 			checkBox.onclick = function(e){
@@ -49,50 +42,60 @@ $(document).ready(function(){
 				// grab the checkBox's parent list element ('li')
 				var listItem = this.parentNode.parentNode;
 				// add the 'disabled' class (bootstrap 'disabled' greys the list item out) to the list item
-				p.addClass(listItem, 'disabled');
+				p.addClass('disabled', listItem);
 			};
-
-
-
 
 			// TIP: //spans allow us to display our HTML elements inline (side by side, rather than on top of each other). Check out this blog post here to get more information: http://bit.ly/1DIuHAO
 
 			// 5. we're going to wrap our checkbox in a span, so lets create a 'checkBoxSpan' variable and save a span html into it.
+			var checkBoxSpan = p.createItem('span');
 
 				// 5a. using a helper function, add your checkBox to your span using our p.addItem helperfunction.
-	
+				p.addItem(checkBoxSpan, checkBox);
 			
 			// 6. create a <p> element that will house our taskName, set it to the variable 'taskName'
-		
+			var taskName = p.createItem('p');
+
 			// 7. create a <span> element that will house our dueDate, set it to the variable 'newDueDate'
+			var newDueDate = p.createItem('span');
 
 			// 8. use a helper function to add the userInput you collected earlier as text to your taskName <p> tag.
-			p.addTextToElement(taskName, userInputTaskName);
+
+			p.addTextToElement(taskName, userInput);
 
 			// 9. use a helper function to add the users chosen due date you collected earlier as text to your newDueDate <span>
-
 			p.addTextToElement(newDueDate, chosenDueDate);
+			// WHY IS THIS NOT WORKING?!?!?!?!?!
 
 			// 10. add the list-group-item class to our newListItem so that bootstrap can make it look pretty.
+			p.addClass(newListItem, 'list-group-item');
 			
 			// 11. add the dueDate class to our newDueDate span so that we can find it more easily later.
+			p.addClass(newDueDate, 'dueDate');
 
-			// 12. add the 'item-attribute' the newDueDate, checkBoxSpan, and taskName. Check out/play around with the styles.css file and see what you can change.
-		
+			// 12. add the 'item-attribute' to the newDueDate, checkBoxSpan, and taskName. Check out/play around with the styles.css file and see what you can change.
+			p.addClass(newDueDate, 'item-attribute');
+			p.addClass(checkBoxSpan, 'item-attribute');
+			p.addClass(taskName, 'item-attribute');
 			
 			// 13. add each item to our final listItem. First add the checkBoxSpan, then add the taskName, then add the newDueDate.
+			p.addItem(newListItem, checkBoxSpan);
+			p.addItem(newListItem, taskName);
+			p.addItem(newListItem, newDueDate);
 
-			// 14. finally, add your list-item to the to-do list 'ul' element.S
+			// 14. finally, add your list-item to the to-do list 
+			// 'ul' element.S
+			p.addItem(toDoList, newListItem);
 
 			// 15. push our new list item in a master list.
-			
-			// 16. use the p.updateIdValue helper function to update the task input box, and date picker to be empty.
+			masterList.push(newListItem);
 
+			// 16. use the p.updateIdValue helper function to update the task input box, and date picker to be empty.
+			p.updateIdValue('taskInput', '');
+			p.updateIdValue('datePicker', '');
 	};
 
-
-
-// ======================================= SECTION 2 FILTER FUNCTIONALITY ==============================================
+// ======SECTION 2 FILTER FUNCTIONALITY =======================
 
 	// 1. create a 'clearCompletedTasksButton' variable that holds the element of the completedTask button
 	var clearCompletedTasksButton = p.grabElementById('clearCompleted');

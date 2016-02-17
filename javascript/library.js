@@ -113,11 +113,11 @@ p.grabDate = function(dueDate){
 
 // 2. takes in a string value representing the date and formats it to mm/dd/yyyy
 p.formatDate = function(date){
-	  var arrayDate = date.split('-');
-	  var year = arrayDate.shift();
-	  arrayDate.push(year);
-	  var formattedDate = arrayDate.join('-');
-	  // console.log(formattedDate);
+	var arrayDate = date.split('-');
+	var year = arrayDate.shift();
+	arrayDate.push(year);
+	var formattedDate = arrayDate.join('-');
+	return formattedDate;
 };
 
 // 17. checkListForDuplicateTasks returns a boolean as to whether any of the toDo's we've already created match the one we input into the function.

@@ -65,7 +65,6 @@ $(document).ready(function(){
 
 			// 9. use a helper function to add the users chosen due date you collected earlier as text to your newDueDate <span>
 			p.addTextToElement(newDueDate, chosenDueDate);
-			// WHY IS THIS NOT WORKING?!?!?!?!?!
 
 			// 10. add the list-group-item class to our newListItem so that bootstrap can make it look pretty.
 			p.addClass(newListItem, 'list-group-item');

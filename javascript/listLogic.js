@@ -99,8 +99,19 @@ $(document).ready(function(){
 			// 16. use the p.updateIdValue helper function to update the task input box, and date picker to be empty.
 			p.updateIdValue('taskInput', '');
 			p.updateIdValue('datePicker', '');
+
+			// p.hasClass should be working
+			// var test = p.hasClass(newListItem, 'sily');
+			// console.log(test);
+
+			// var testhasClass = p.hasClass(newListItem,'silly');
+			// console.log('testhasClass',testhasClass);
+			var testComplete = p.getAllCompleteTasks(masterList);
+			console.log('testComplete',testComplete);
 		}
 	};
+
+
 
 // ======SECTION 2 FILTER FUNCTIONALITY =======================
 	//in your index.html, uncomment lines 31 through 33
@@ -110,15 +121,6 @@ $(document).ready(function(){
 
 	// 2. create an onsubmit event on the clearCompletedTasksButton
 	clearCompletedTasksButton.onsubmit = function(e){
-		// preventDefault stops the page from reloading when an event happens.
-		e.preventDefault(e);
-		// use our helper, p.getAllCompleteTasks, function to get a collection of all of the completed tasks, and save it into a variable, completedToDos
-		var completedToDos = p.getAllCompleteTasks(toDoList);
 
-		// use our helper, p.emptyList empty the current list of items in our toDoList
-		p.emptyList(toDoList);
-
-		// use our helper, p.updateToDoList toDo list with  only the completedToDos 
-		p.updateToDoList(toDoList, completedToDos);
 	};	
 });

@@ -171,17 +171,13 @@ p.hasClass = function(listItem, inputClass){
 };
 
 // returns an array containing only the completed tasks 
-// TIP: complete p.hasClass before solving this function
 p.getAllCompleteTasks = function(list){
-	// use helper function return whether or not the element has the class 'disabled.'
-	_.every(list, function(item){
-		// returns an array filled with all of the classes placed on the corresponding element
-		var classArray = p.grabClassList(item);
-		// filter out the items in the classArray that don't have the class 'disabled'
-		_.filter(classArray, function(index){
-			return index != 'disabled';
-		});
+	// completedArray is an array that stores the list items that have the 'disabled' class
+	var completedArray = _.filter(list, function(item){
+		// use p.hasClass to return whether or not the element has the class 'disabled'. if p.hasClass returns true, the item has a 'disabled' class and will be pushed into complete array by _.filter
+		return p.hasClass(item, 'disabled');
 	});
+	return completedArray;
 };
 
 // emptys all list elements from our toDoList html element.

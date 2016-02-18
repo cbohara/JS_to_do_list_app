@@ -5,7 +5,7 @@ $(document).ready(function(){
 	// this is the HTML representation of our "create task" button. We can add 'events' to so that it responds to the users actions. Read about dom events here: http://www.w3schools.com/js/js_htmldom_events.asp
 	var createTaskForm = p.grabElementById('taskForm');
 
-	// this is an array elementing containing all of the current list elements in your toDoList.
+	// this is an array element containing all of the current list elements in your toDoList.
 	var currentList = p.grabChildren(toDoList);
 
 	// we're going to be sorting/changing our original list, so our masterlist is going to cache every single item we create so that we can always reference them.
@@ -25,8 +25,14 @@ $(document).ready(function(){
 			// 2a. create a chosenDueDate variable, and use your p.formatDate helper function to the proper date.
 		var chosenDueDate = p.formatDate(userDate);
 
-		// 17. SKIP IF 1-16 isn't finished: Under this line,  create an if statement that uses the checkListForDuplicates helper function to check our masterList for duplicates. Oh, and create the checkListForDuplicates helper function :).  If there are no duplicates, run sections 3 through 16. If there is a duplicate, alert the user that the task is a duplicate and update the userInputs to be empty.
+		// 17. SKIP IF 1-16 isn't finished: Under this line,  create an if statement that uses the checkListForDuplicates helper function to check our masterList for duplicates. Oh, and create the checkListForDuplicates helper function :).  
 
+		// If there are no duplicates, run sections 3 through 16. If there is a duplicate, alert the user that the task is a duplicate and update the userInputs to be empty.
+		if(p.checkListForDuplicateTasks(masterList, userInput)){
+			// if there are duplicates alert the user that the task is a duplicate and update the userInputs to be empty
+			alert('The task is a duplicate!');
+		}
+		else{
 			// 3. use one of our helper functions to create a new list, 'li' element, saved to the variable "newListItem".
 			var newListItem = p.createItem('li');
 
@@ -93,6 +99,7 @@ $(document).ready(function(){
 			// 16. use the p.updateIdValue helper function to update the task input box, and date picker to be empty.
 			p.updateIdValue('taskInput', '');
 			p.updateIdValue('datePicker', '');
+		}
 	};
 
 // ======SECTION 2 FILTER FUNCTIONALITY =======================
@@ -104,7 +111,7 @@ $(document).ready(function(){
 	// 2. create an onsubmit event on the clearCompletedTasksButton
 	clearCompletedTasksButton.onsubmit = function(e){
 		// preventDefault stops the page from reloading when an event happens.
-		e.preventDefault();
+		e.preventDefault(e);
 		// use our helper, p.getAllCompleteTasks, function to get a collection of all of the completed tasks, and save it into a variable, completedToDos
 		var completedToDos = p.getAllCompleteTasks(toDoList);
 

@@ -127,10 +127,9 @@ p.formatDate = function(date){
 
 // 17. checkListForDuplicateTasks returns a boolean as to whether any of the toDo's we've already created match the one we input into the function.
 p.checkListForDuplicateTasks = function(toDoList, taskTitle){
-	// use _.every to loop through the toDoList
-	_.every(toDoList, function(listItem){
-		// use a helper function to get the text from each item from each list item
-		var listItemText = getTextFromListItem(listItem);
+	// returns true if any of the values in the list pass the predicate truth test
+	return _.some(toDoList, function(listItem){
+		var listItemText = p.getTextFromListItem(listItem);
 		// check to see whether the text matches. if the text matches, the function will return true.  if the text does not match, return false.
 		return listItemText === taskTitle;
 	});
@@ -141,13 +140,13 @@ p.getCurrentDate = function(){
 	// create a variable to hold the current date
 	var currentDate = new Date();
 	// use the helper function to return the currentDate formatted in mm/dd/yyyy
-	return formatDate(currentDate);
+	return p.formatDate(currentDate);
 };
 
 // takes in the listItem and a string value that represents the inputClass and returns true or false as to whether an html element has a class.
 p.hasClass = function(listItem, inputClass){
 	// returns an array filled with all of the classes placed on the listItem element
-	var classArray = grabClassList(listItem);
+	var classArray = p.grabClassList(listItem);
 	// loop through the classArray to determine if an element matches the inputClass. if there is a match, the function will return true. else it will return false.
 	_.every(classArray, function(index){
 		return index === inputClass;
@@ -169,20 +168,18 @@ p.getAllCompleteTasks = function(list){
 };
 
 // emptys all list elements from our toDoList html element.
-p.emptyList = function(toDolist){
-	// use a helper function to grab the array of children from the toDoList
-	// returns an array containing the child of the associated element
-	var childArray = grabChildren(toDoList);
-	console.log(childArray);
-	// loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist. return the empty list to the user.
-	return _.each(childArray,p.removeLastToDoListItem(index));
-
+p.emptyList = function(toDoList){
+    // use a helper function to grab the array of children from the toDoList
+   	var childArray = p.grabChildren(toDoList);
+    // loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist
+    var empty = _.each(childArray, p.removeLastToDoListItem(toDoList));
+    return empty;
 };
 
 // updates the toDoList element with a new list of li
 p.updateToDoList = function(toDoList, newList){
 	// use _.each to loop through the newList. use our p.addItem helper function to add each new item to the list
-	return _.each(newList, addItem(itemToAddTo, newListItemToAdd));
+	return _.each(newList, p.addItem(itemToAddTo, newListItemToAdd));
 };
 
 // NIGHTMARE MODE: These last two pieces of functionality take quite a bit of JavaScript prowess. Please proceed with caution...

@@ -63,7 +63,7 @@ p.removeSpecificToDoListItem = function(element, index){
 // takes a the toDoList html item and removes the last child element.
 p.removeLastToDoListItem = function(toDoList){
 	toDoList.removeChild(toDoList.lastChild);
-	return toDoList.children
+	return toDoList.children;
 };
 
 // adds the itemToAddTo to the itemToAdd.
@@ -174,25 +174,31 @@ p.hasClass = function(listItem, inputClass){
 p.getAllCompleteTasks = function(list){
 	// completedArray is an array that stores the list items that have the 'disabled' class
 	var completedArray = _.filter(list, function(item){
-		// use p.hasClass to return whether or not the element has the class 'disabled'. if p.hasClass returns true, the item has a 'disabled' class and will be pushed into complete array by _.filter
+		// use p.hasClass to return whether or not the element has the class 'disabled'. if p.hasClass returns true, the item has a 'disabled' class and will be pushed into completedArray by _.filter function
 		return p.hasClass(item, 'disabled');
 	});
 	return completedArray;
 };
 
-// emptys all list elements from our toDoList html element.
+
+// =============STRUGGLE IS REAL WITH EMPTY LIST FUNCTION ========
+// emptys all list elements from our toDoList html element
 p.emptyList = function(toDoList){
-    // use a helper function to grab the array of children from the toDoList
-   	var childArray = p.grabChildren(toDoList);
-    // loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist
-    var empty = _.each(childArray, p.removeLastToDoListItem(toDoList));
-    return empty;
+	// use a helper function to grab the array of children from the toDoList
+	// p.grabChildren returns an array containing the child of the associated element
+	var arrayOfChildren = p.grabChildren(toDoList);
+	console.log('arrayOfChildren',arrayOfChildren);
+	// loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist.
+	_.each(arrayOfChildren, function(element){
+		p.removeLastToDoListItem(element);
+	});
+	console.log('arrayOfChildren after remove',arrayOfChildren);
+	// return the list to the user
 };
 
 // updates the toDoList element with a new list of li
 p.updateToDoList = function(toDoList, newList){
-	// use _.each to loop through the newList. use our p.addItem helper function to add each new item to the list
-	return _.each(newList, p.addItem(itemToAddTo, newListItemToAdd));
+
 };
 
 // NIGHTMARE MODE: These last two pieces of functionality take quite a bit of JavaScript prowess. Please proceed with caution...

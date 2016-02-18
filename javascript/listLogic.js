@@ -100,14 +100,10 @@ $(document).ready(function(){
 			p.updateIdValue('taskInput', '');
 			p.updateIdValue('datePicker', '');
 
-			// p.hasClass should be working
-			// var test = p.hasClass(newListItem, 'sily');
-			// console.log(test);
 
-			// var testhasClass = p.hasClass(newListItem,'silly');
-			// console.log('testhasClass',testhasClass);
-			var testComplete = p.getAllCompleteTasks(masterList);
-			console.log('testComplete',testComplete);
+
+			var testReturn= p.emptyList(toDoList);
+			console.log('testListLogic',testReturn);
 		}
 	};
 

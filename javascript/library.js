@@ -105,8 +105,6 @@ p.grabDate = function(dueDate){
 	return dueDate.value;
 };
 
-
-
 // =========================== END OF HELPER FUNCTIONS =====================================
 
 // =========================== START OF EXERCISES ===========================================
@@ -137,10 +135,29 @@ p.checkListForDuplicateTasks = function(toDoList, taskTitle){
 
 // use the Date object to return todays month and date. Use the p.formatDate helper function to return the currentDate formatted in mm/dd/yyyy. Look up how to use the Date object here: http://mzl.la/1fvwX1i
 p.getCurrentDate = function(){
-	// create a variable to hold the current date
+	// create a variable to hold the current date object
+	// var currentDate = new Date();
 	var currentDate = new Date();
-	// use the helper function to return the currentDate formatted in mm/dd/yyyy
-	return p.formatDate(currentDate);
+	// transform current day to a string
+	var currentDay = currentDate.getDate();
+	var currentDayString = currentDay.toString();
+	// transform current month to a string
+	var currentMonth = currentDate.getMonth()+1;
+	var currentMonthString = currentMonth.toString();
+	// transform current year to a string
+	var currentYear = currentDate.getFullYear();
+	var currentYearString = currentYear.toString();
+	// if the month value is only one digit, add a 0 in front of the currentMonthString value
+	if(currentMonthString.length === 1){
+		currentMonthString = "0" + currentMonthString;
+	}
+	// if the date value is only one digit, add a 0 in front of the currentMonthString value
+	if(currentDayString.length === 1){
+		currentDayString = "0" + currentDayString;
+	}
+	// concatonate to combine to mm-dd-yyyy
+	var dateString = currentMonthString + "-" + currentDayString + "-" + currentYearString;
+	return dateString;
 };
 
 // takes in the listItem and a string value that represents the inputClass and returns true or false as to whether an html element has a class.

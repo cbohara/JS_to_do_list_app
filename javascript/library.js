@@ -66,10 +66,10 @@ p.removeLastToDoListItem = function(toDoList){
 	return toDoList.children;
 };
 
-// adds the itemToAddTo to the itemToAdd.
-p.addItem = function(itemToAddTo, itemToAdd){
-	itemToAddTo.appendChild(itemToAdd);
-	return itemToAddTo
+// adds itemToAdd to original
+p.addItem = function(original, itemToAdd){
+	original.appendChild(itemToAdd);
+	return original;
 };
 
 // adds a class to an element and returns the classList
@@ -189,16 +189,25 @@ p.emptyList = function(toDoList){
 	var arrayOfChildren = p.grabChildren(toDoList);
 	console.log('arrayOfChildren',arrayOfChildren);
 	// loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist.
-	_.each(arrayOfChildren, function(element){
+	var result = _.each(arrayOfChildren, function(element){
 		p.removeLastToDoListItem(element);
 	});
-	console.log('arrayOfChildren after remove',arrayOfChildren);
+	console.log('result after remove',result);
 	// return the list to the user
 };
 
-// updates the toDoList element with a new list of li
+// ===== STRUGGLING WITH UPDATETODOLIST ========
+// updates the toDoList element with a new list items
 p.updateToDoList = function(toDoList, newList){
-
+	// use _.each to loop through the newList
+	_.each(toDoList, function(toDoListItem){
+		console.log('newListItem',newListItem);
+		console.log('toDoList',toDoList);
+		console.log('newList',newList);
+		// use our p.addItem helper function to add each newListItem to the original toDoList
+		p.addItem(toDoList, newListItem);
+	});
+	
 };
 
 // NIGHTMARE MODE: These last two pieces of functionality take quite a bit of JavaScript prowess. Please proceed with caution...

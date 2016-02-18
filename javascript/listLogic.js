@@ -101,9 +101,13 @@ $(document).ready(function(){
 			p.updateIdValue('datePicker', '');
 
 
+			// // testing emptyList function
+			// var testReturn= p.emptyList(toDoList);
+			// console.log('testListLogic',testReturn);
 
-			var testReturn= p.emptyList(toDoList);
-			console.log('testListLogic',testReturn);
+			// testing p.updateToDoList
+			var test = p.updateToDoList(toDoList, toDoList);
+			console.log('test update',test);
 		}
 	};
 

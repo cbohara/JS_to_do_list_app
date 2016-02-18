@@ -125,7 +125,7 @@ p.formatDate = function(date){
 
 // 17. checkListForDuplicateTasks returns a boolean as to whether any of the toDo's we've already created match the one we input into the function.
 p.checkListForDuplicateTasks = function(toDoList, taskTitle){
-	// returns true if any of the values in the list pass the predicate truth test
+	// returns true if any of the values in the list match the taskTitle,    (most recent user input)
 	return _.some(toDoList, function(listItem){
 		var listItemText = p.getTextFromListItem(listItem);
 		// check to see whether the text matches. if the text matches, the function will return true.  if the text does not match, return false.
@@ -133,7 +133,7 @@ p.checkListForDuplicateTasks = function(toDoList, taskTitle){
 	});
 };
 
-// use the Date object to return todays month and date. Use the p.formatDate helper function to return the currentDate formatted in mm/dd/yyyy. Look up how to use the Date object here: http://mzl.la/1fvwX1i
+// use the Date object to return todays month and date. Look up how to use the Date object here: http://mzl.la/1fvwX1i
 p.getCurrentDate = function(){
 	// create a variable to hold the current date object
 	var currentDate = new Date();
@@ -164,9 +164,10 @@ p.hasClass = function(listItem, inputClass){
 	// returns an array filled with all of the classes placed on the listItem element
 	var classArray = p.grabClassList(listItem);
 	// loop through the classArray to determine if an element matches the inputClass. if there is a match, the function will return true. else it will return false.
-	_.every(classArray, function(index){
+	return _.some(classArray, function(index){
+		// check to see whether the text matches. if the text matches, the function will return true.  if the text does not match, return false.
 		return index === inputClass;
-	}); 
+	});
 };
 
 // returns an array containing only the completed tasks 

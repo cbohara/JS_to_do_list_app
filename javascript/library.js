@@ -37,7 +37,7 @@ p.updateIdValue = function(id, inputText){
 	return p.grabElementById.value;
 };
 
-// returns an array containing the child of the associated element.
+// grabChildren returns an array containing the child of the associated element.
 p.grabChildren = function(element){
 	return element.children;
 };
@@ -61,6 +61,9 @@ p.removeSpecificToDoListItem = function(element, index){
 };
 
 // takes a the toDoList html item and removes the last child element.
+// NOT CORRECT
+// WE CANNOT REMOVE JUST THE LAST ELEMENT
+// THIS IS WHY IT CLEARS THE ENTIRE LIST INSTEAD JUST THE DISABLED ITEMS
 p.removeLastToDoListItem = function(toDoList){
 	toDoList.removeChild(toDoList.lastChild);
 	return toDoList.children;
@@ -161,9 +164,10 @@ p.getCurrentDate = function(){
 
 // takes in the listItem and a string value that represents the inputClass and returns true or false as to whether an html element has a class.
 p.hasClass = function(listItem, inputClass){
+	// use one of the helper functions to grab the classlist array from our listItem
 	// returns an array filled with all of the classes placed on the listItem element
 	var classArray = p.grabClassList(listItem);
-	// loop through the classArray to determine if an element matches the inputClass. if there is a match, the function will return true. else it will return false.
+	// loop through the classArray to determine if an element matches the inputClass. if there is a match, the function will return true. else it will return false
 	return _.some(classArray, function(index){
 		// check to see whether the text matches. if the text matches, the function will return true.  if the text does not match, return false.
 		return index === inputClass;
@@ -173,41 +177,30 @@ p.hasClass = function(listItem, inputClass){
 // returns an array containing only the completed tasks 
 p.getAllCompleteTasks = function(list){
 	// completedArray is an array that stores the list items that have the 'disabled' class
-	var completedArray = _.filter(list, function(item){
+	return _.filter(list, function(item){
 		// use p.hasClass to return whether or not the element has the class 'disabled'. if p.hasClass returns true, the item has a 'disabled' class and will be pushed into completedArray by _.filter function
-		return p.hasClass(item, 'disabled');
+		return !p.hasClass(item, 'list-group-item disabled');
 	});
-	return completedArray;
 };
 
-
-// =============STRUGGLE IS REAL WITH EMPTY LIST FUNCTION ========
 // emptys all list elements from our toDoList html element
 p.emptyList = function(toDoList){
 	// use a helper function to grab the array of children from the toDoList
 	// p.grabChildren returns an array containing the child of the associated element
 	var arrayOfChildren = p.grabChildren(toDoList);
-	console.log('arrayOfChildren',arrayOfChildren);
 	// loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist.
-	var result = _.each(arrayOfChildren, function(element){
-		p.removeLastToDoListItem(element);
+	_.each(arrayOfChildren, function(){
+		p.removeLastToDoListItem();
 	});
-	console.log('result after remove',result);
-	// return the list to the user
 };
 
-// ===== STRUGGLING WITH UPDATETODOLIST ========
 // updates the toDoList element with a new list items
 p.updateToDoList = function(toDoList, newList){
 	// use _.each to loop through the newList
-	_.each(toDoList, function(toDoListItem){
-		console.log('newListItem',newListItem);
-		console.log('toDoList',toDoList);
-		console.log('newList',newList);
-		// use our p.addItem helper function to add each newListItem to the original toDoList
-		p.addItem(toDoList, newListItem);
+	_.each(newList, function(newListItem){
+		// use our p.addItem helper function to add each new item to the list
+		p.addItem(masterList, newListItem);
 	});
-	
 };
 
 // NIGHTMARE MODE: These last two pieces of functionality take quite a bit of JavaScript prowess. Please proceed with caution...

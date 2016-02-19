@@ -49,7 +49,7 @@ $(document).ready(function(){
 				// grab the checkBox's parent list element ('li')
 				var listItem = this.parentNode.parentNode;
 				// add the 'disabled' class (bootstrap 'disabled' greys the list item out) to the list item
-				p.addClass('disabled', listItem);
+				p.addClass(listItem, 'disabled');
 			};
 
 			// TIP: //spans allow us to display our HTML elements inline (side by side, rather than on top of each other). Check out this blog post here to get more information: http://bit.ly/1DIuHAO
@@ -99,28 +99,27 @@ $(document).ready(function(){
 			// 16. use the p.updateIdValue helper function to update the task input box, and date picker to be empty.
 			p.updateIdValue('taskInput', '');
 			p.updateIdValue('datePicker', '');
-
-
-			// // testing emptyList function
-			// var testReturn= p.emptyList(toDoList);
-			// console.log('testListLogic',testReturn);
-
-			// testing p.updateToDoList
-			var test = p.updateToDoList(toDoList, toDoList);
-			console.log('test update',test);
 		}
 	};
 
-
-
 // ======SECTION 2 FILTER FUNCTIONALITY =======================
-	//in your index.html, uncomment lines 31 through 33
-
-	// 1. create a 'clearCompletedTasksButton' variable that holds the element of the completedTask button
+	// in your index.html, uncomment lines 31 through 33
+	
+	// create a 'clearCompletedTasksButton' variable that holds the element of the completedTask button
 	var clearCompletedTasksButton = p.grabElementById('clearCompleted');
 
-	// 2. create an onsubmit event on the clearCompletedTasksButton
+	// create an onsubmit event on the clearCompletedTasksButton
 	clearCompletedTasksButton.onsubmit = function(e){
-
+		// instantiate your preventDefault() like
+		// preventDefault stops the page from reloading when an event happens
+		e.preventDefault();
+		// use our helper, p.getAllCompleteTasks, function to get a collection of all of the completed tasks, and save it into a variable, completedToDos
+		var completedToDos = p.getAllCompleteTasks(masterList);
+		console.log('completedToDos',completedToDos);
+		// use our helper, p.emptyList empty the current list of items in our toDoList
+		var test = p.emptyList(toDoList);
+		console.log('emptyList',test);
+		// use our helper, p.updateToDoList toDo list with only the completedToDos
+		// p.updateToDoList(masterList, completedToDos);
 	};	
 });

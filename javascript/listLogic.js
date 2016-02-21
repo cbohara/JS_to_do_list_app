@@ -117,9 +117,9 @@ $(document).ready(function(){
 		var completedToDos = p.getAllCompleteTasks(masterList);
 		console.log('completedToDos',completedToDos);
 		// use our helper, p.emptyList empty the current list of items in our toDoList
-		var test = p.emptyList(toDoList);
-		console.log('emptyList',test);
 		// use our helper, p.updateToDoList toDo list with only the completedToDos
-		// p.updateToDoList(masterList, completedToDos);
+		p.updateToDoList(masterList, completedToDos);
+		completedToDos = [];
+		console.log('completedToDos',completedToDos);
 	};	
 });

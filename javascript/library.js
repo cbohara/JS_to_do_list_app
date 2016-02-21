@@ -1,4 +1,4 @@
-window.p = {};
+alwindow.p = {};
 
 /*
 
@@ -185,13 +185,14 @@ p.getAllCompleteTasks = function(list){
 
 // emptys all list elements from our toDoList html element
 p.emptyList = function(toDoList){
-	// use a helper function to grab the array of children from the toDoList
-	// p.grabChildren returns an array containing the child of the associated element
-	var arrayOfChildren = p.grabChildren(toDoList);
+	// // use a helper function to grab the array of children from the toDoList
+	// // p.grabChildren returns an array containing the child of the associated element
+	// var arrayOfChildren = p.grabChildren(toDoList);
 	// loop through the array of children and use our p.removeLastToDoListItem helper function to remove each item from the toDolist.
-	_.each(arrayOfChildren, function(){
-		p.removeLastToDoListItem();
-	});
+	// _.each(toDoList, function(element){
+	// 	p.removeLastToDoListItem(element);
+	// });
+	console.log('toDoList in emptyList',toDoList);
 };
 
 // updates the toDoList element with a new list items
@@ -199,7 +200,7 @@ p.updateToDoList = function(toDoList, newList){
 	// use _.each to loop through the newList
 	_.each(newList, function(newListItem){
 		// use our p.addItem helper function to add each new item to the list
-		p.addItem(masterList, newListItem);
+		p.addItem(toDoList, newListItem);
 	});
 };
 
